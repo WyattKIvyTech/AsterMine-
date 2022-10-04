@@ -1,0 +1,26 @@
+###
+
+###
+from tkinter import *
+import pygame
+from pygame.locals import *
+
+pygame.init()
+
+#screen is created
+mainScreen = pygame.display.set_mode((850,750))
+
+#event loop
+running = True
+while running == True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running == False
+pygame.quit()
+
+
+#defining player's sprite
+
+
+
+
