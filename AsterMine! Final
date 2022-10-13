@@ -1,0 +1,124 @@
+###
+#Program: AsterMine!
+#Author: Wyatt Kessie
+#Date Last Modified: 10/13/2022
+###
+
+from tkinter import *
+from turtle import *
+from PIL import Image, ImageTk
+import math
+import random
+
+#Player's ship class
+class playerShip(object):
+    def __init__ (self, dx, dy, x, y):
+        self.goto(x,y)
+        self.dx = dx
+        self.dy = dy
+
+
+def main():
+
+    #Main window things
+    astermine = Tk()
+    astermine.title("AsterMine!")
+    gamefield = Canvas(astermine, bg = "black", width = 650, height = 800)
+    gamefield.pack()
+
+    #main window remaining labels
+    #label for lives
+    livesLabel = Label(astermine, text = "Lives: ")
+    livesLabel.pack()
+    
+    #label for score
+    scoreLabel = Label(astermine, text = "Score: ")
+    scoreLabel.pack()
+
+    #label for remaining missiles
+    missilesLabel = Label(astermine, text = "Missiles: ")
+    missilesLabel.pack()
+    
+
+    #Opening 2nd window
+    win2 = Toplevel(width = 300, height = 350, bg = "black")
+
+    #Button definitions
+    #pauseButton def
+    def pauseGame():
+        pass
+    
+    #optionButton def
+    def optionsGame():
+        pass
+        
+    #exitButton def
+    def exitGame():
+        astermine.destroy()
+        astermine.quit()
+
+    
+    #2nd window buttons
+    pauseButton = Button(win2, text = "PAUSE", command = pauseGame)
+    pauseButton.pack(fill = X)
+        
+    optionButton = Button(win2, text = "OPTIONS", command = optionsGame)
+    optionButton.pack(fill = X)
+
+    exitButton = Button(win2, text = "EXIT GAME", command = exitGame)
+    exitButton.pack(fill = X)
+
+
+
+    #Drawing player(ship) to astermine window
+    shipSprite = ImageTk.PhotoImage(Image.open("PlayerShipSprite.PNG"))
+    ship = gamefield.create_image(325, 400, image = shipSprite)
+
+    #Drawing enemy ship to astermine window
+    shipSpriteSmall = ImageTk.PhotoImage(Image.open("EnemyShip.PNG"))
+    smallEnemy = gamefield.create_image(325, 100, image = shipSpriteSmall)
+
+    #Drawing asteroids to astermine window
+    asteroid1 = ImageTk.PhotoImage(Image.open("Asteroid1.PNG"))
+    rock1 = gamefield.create_image(600, 356, image = asteroid1)
+    asteroid2 = ImageTk.PhotoImage(Image.open("Asteroid2.PNG"))
+    rock2 = gamefield.create_image(416, 80, image = asteroid2)
+
+    #Player ship moving forward
+    def moveUp(event):
+        x = 0
+        y = -20
+        gamefield.move(ship, x, y)
+    astermine.bind("<Up>", moveUp)
+
+    #Player ship moving down
+    def moveDown(event):
+        x = 0
+        y = 20
+        gamefield.move(ship, x, y)
+    astermine.bind("<Down>", moveDown)
+        
+    #Player ship moving left
+    def moveLeft(event):
+        x = -20
+        y = 0
+        gamefield.move(ship, x, y)
+    astermine.bind("<Left>", moveLeft)
+
+    #player ship moving right
+    def moveRight(event):
+        x = 20
+        y = 0
+        gamefield.move(ship, x, y)
+    astermine.bind("<Right>", moveRight)
+
+
+
+
+
+    #mainloop start
+    astermine.mainloop()
+
+#main function being called
+if __name__ == "__main__":
+    main()
